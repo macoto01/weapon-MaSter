@@ -1,0 +1,40 @@
+<svg viewBox="0 0 580 400" xmlns="http://www.w3.org/2000/svg">
+<style>
+text{font-family:sans-serif;fill:#2c2c2a}
+.th{font-weight:600}
+.card{fill:#ffffff;stroke:#4B4FCB}
+.win{fill:#BA7517}
+.winEmpty{fill:none;stroke:#888780}
+.life{fill:#D85A30}
+.lifeEmpty{fill:none;stroke:#b4b2a9;stroke-dasharray:2 2}
+.btn{fill:#EEEDFE;stroke:#7F77DD}
+</style>
+
+<rect x="10" y="10" width="560" height="380" rx="4" fill="#ffffff" stroke="#b4b2a9" opacity="0.5"/>
+<text x="290" y="35" font-size="10" text-anchor="middle" opacity="0.6">(背景: バトル画面)</text>
+<rect x="10" y="10" width="560" height="380" fill="#2c2c2a" opacity="0.35"/>
+
+<rect x="140" y="60" width="300" height="300" rx="8" class="card"/>
+<text x="290" y="110" class="th" font-size="28" text-anchor="middle">勝利</text>
+<line x1="160" y1="135" x2="420" y2="135" stroke="#d3d1c7"/>
+
+<circle cx="190" cy="168" r="9" class="win"/>
+<circle cx="212" cy="168" r="9" class="win"/>
+<circle cx="234" cy="168" r="9" class="win"/>
+<circle cx="256" cy="168" r="9" class="winEmpty"/>
+<circle cx="278" cy="168" r="9" class="winEmpty"/>
+<circle cx="300" cy="168" r="9" class="winEmpty"/>
+<circle cx="322" cy="168" r="9" class="winEmpty"/>
+<circle cx="344" cy="168" r="9" class="winEmpty"/>
+<circle cx="366" cy="168" r="9" class="winEmpty"/>
+<circle cx="388" cy="168" r="9" class="winEmpty"/>
+
+<circle cx="230" cy="210" r="10" class="life"/>
+<circle cx="260" cy="210" r="10" class="life"/>
+<circle cx="290" cy="210" r="10" class="life"/>
+<circle cx="320" cy="210" r="10" class="life"/>
+<circle cx="350" cy="210" r="10" class="lifeEmpty"/>
+
+<rect x="215" y="290" width="150" height="44" rx="22" class="btn"/>
+<text x="290" y="317" dominant-baseline="middle" font-size="14" text-anchor="middle">次へ</text>
+</svg>

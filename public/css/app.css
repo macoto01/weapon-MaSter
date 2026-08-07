@@ -1,0 +1,892 @@
+/*
+ * ウエポンマスター 検証実装 共通スタイル。
+ * 装飾は最小限にとどめつつ、各ワイヤーフレーム仕様書のレイアウト比率(ヘッダー/バックパック/
+ * ショップ/一時置き場の配置など)を素朴なHTML/CSSで再現する。画像・アニメーション等の
+ * ビジュアル演出は入れない。
+ */
+* { box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+    margin: 0;
+    background: #eef0f2;
+    color: #222;
+}
+
+button {
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.hint {
+    font-size: 11px;
+    color: #666;
+}
+
+/* ---------- タイトル画面 ---------- */
+.title-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+    background: #2b2f36;
+    color: #fff;
+}
+
+.title-screen .logo {
+    font-size: 36px;
+    letter-spacing: 4px;
+    margin: 0;
+}
+
+.title-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 240px;
+}
+
+.title-buttons button {
+    padding: 14px;
+    background: #fff;
+    border: 1px solid #999;
+    font-size: 15px;
+}
+
+.title-buttons button:hover { background: #dbe9ff; }
+
+.howto-button {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #999;
+    font-size: 11px;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.overlay[hidden] { display: none; }
+
+.overlay-box {
+    background: #fff;
+    color: #222;
+    padding: 20px;
+    min-width: 280px;
+    max-width: 90vw;
+    border: 1px solid #666;
+}
+
+/* ---------- 図鑑画面 ---------- */
+.encyclopedia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: #333;
+    color: #fff;
+}
+
+.encyclopedia-layout {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 12px;
+    padding: 12px;
+}
+
+.tag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tag-item {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.tag-item.selected {
+    background: #333;
+    color: #fff;
+}
+
+.entry-list {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.entry-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto auto;
+    gap: 10px;
+    padding: 8px 6px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+    align-items: center;
+}
+
+.entry-thumb {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.entry-row .entry-rarity {
+    color: #c9a227;
+    letter-spacing: 1px;
+}
+
+.entry-row .entry-detail {
+    grid-column: 1 / -1;
+    color: #666;
+    font-size: 11px;
+}
+
+.entry-row .entry-skill {
+    color: #456;
+}
+
+.placeholder-note {
+    padding: 20px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* ---------- バトル準備画面ヘッダー行(プレイヤー/ステータス/ラウンドを個別の枠として表示) ---------- */
+/* ワイヤーフレーム仕様1節: プレイヤー情報22%・ステータス38%・ラウンド15%・設定/メニュー21%の幅比率で固定 */
+.prep-header-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.prep-header-row .prep-panel {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.prep-header-row__player {
+    flex: 0 0 22%;
+}
+
+.prep-header-row__status {
+    flex: 0 0 38%;
+    gap: 14px;
+}
+
+/* バトル準備画面ワイヤーフレーム仕様1節: HP/ST/ST消費量は縦に並べ、各行の間に区切り線を挿入する */
+.status-block--stacked {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0;
+    width: 100%;
+}
+
+.status-block--stacked span {
+    padding: 2px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.status-block--stacked span:last-child {
+    border-bottom: none;
+}
+
+.rank-label {
+    font-size: 10px;
+    color: #6b4a0c;
+}
+
+.prep-header-row__round {
+    flex: 0 0 15%;
+    justify-content: center;
+    border-color: #BA7517;
+    background: #FAEEDA;
+    color: #6b4a0c;
+}
+
+.prep-header-row__menu {
+    flex: 0 0 21%;
+    justify-content: center;
+}
+
+.prep-header-row__menu #retire-button {
+    border: 1px solid #c33;
+    background: #fdecec;
+    color: #a11;
+    padding: 4px 12px;
+    font-size: 11px;
+}
+
+/* ---------- バトル準備画面 ---------- */
+.prep-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 400px;
+}
+
+.prep-layout > section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prep-panel {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+}
+
+.prep-panel h2 {
+    font-size: 12px;
+    margin: 0 0 4px;
+}
+
+.expand-banner {
+    background: #fff3cd;
+    border: 1px solid #e0a800;
+    color: #7a5c00;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 8px;
+    margin-bottom: 6px;
+}
+
+.expand-banner[hidden] {
+    display: none;
+}
+
+/* バックパック拡張(戦闘後の+4マス)が残っている間、対象外の操作をまとめて封じる。
+   バックパック本体(#backpack-panel)とリタイアボタンだけは対象外(操作可能なまま)。 */
+body.expansion-locked #shop-actions-section {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+body.expansion-locked #backpack-panel {
+    border-color: #e0a800;
+}
+
+canvas.backpack-canvas {
+    border: 1px solid #999;
+    background: #fff;
+    display: block;
+    touch-action: none;
+}
+
+.item-actions {
+    margin-top: 8px;
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.shop-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.shop-item, .temp-item {
+    border: 1px solid #7F77DD;
+    padding: 4px 6px;
+    font-size: 10px;
+    background: #EEEDFE;
+    min-width: 80px;
+}
+
+.shop-item.selected, .temp-item.selected {
+    border-color: #d24;
+    background: #ffe9e9;
+}
+
+.item-thumb {
+    display: block;
+    width: 100%;
+    height: 48px;
+    object-fit: contain;
+    background: #fff;
+    margin-bottom: 2px;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.item-thumb--fallback {
+    border-radius: 2px;
+}
+
+.shop-item__price {
+    margin-top: 2px;
+    border: 1px solid #7F77DD;
+    border-radius: 3px;
+    background: #fff;
+    padding: 2px 0;
+    font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.shop-item__price--discounted {
+    color: #d24;
+    font-weight: bold;
+}
+
+.reroll-button {
+    position: relative;
+    top: -10px;
+    left: 4px;
+    border: 1px solid #D85A30;
+    background: #FAECE7;
+    color: #993C1D;
+    padding: 4px 10px;
+    font-size: 11px;
+}
+
+.temp-item {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+/* 武器置き場に新しく現れたアイテムだけに付く着地演出(バックパックから外す/
+   ショップで買ってそのまま置く、いずれの経路でも共通)。
+   上空から重力で加速しながら落下し、着地の瞬間につぶれて(スカッシュ)、
+   軽く跳ね返ってから収まる。前半(落下)はcubic-bezierで加速させ、
+   後半(着地〜バウンド)は減速させることで「ふわっと」ではなく「重さのある落下」に見せる。 */
+@keyframes temp-item-drop-in {
+    0% {
+        transform: translateY(-90px) scaleX(1) scaleY(1);
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); /* 重力加速 */
+    }
+    12% {
+        opacity: 1;
+    }
+    58% {
+        transform: translateY(0) scaleX(1) scaleY(1); /* 着地 */
+        animation-timing-function: ease-out;
+    }
+    70% {
+        transform: translateY(0) scaleX(1.2) scaleY(0.78); /* 着地の衝撃でつぶれる */
+        animation-timing-function: ease-out;
+    }
+    82% {
+        transform: translateY(-9px) scaleX(0.94) scaleY(1.08); /* 軽く跳ねる */
+        animation-timing-function: ease-in;
+    }
+    92% {
+        transform: translateY(1px) scaleX(1.03) scaleY(0.98);
+        animation-timing-function: ease-out;
+    }
+    100% {
+        transform: translateY(0) scaleX(1) scaleY(1);
+    }
+}
+
+.temp-item--drop-in {
+    transform-origin: bottom center;
+    animation: temp-item-drop-in 560ms both;
+}
+
+.temp-storage-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    min-height: 36px;
+}
+
+/* バックパックの武器を武器置き場までドラッグしてきた際、「外す」ことができることを示すハイライト。 */
+.temp-storage-row--drop-target {
+    outline: 2px solid #1D9E75;
+    outline-offset: 2px;
+    background: #E1F5EE;
+}
+
+/* ドラッグ中、掴んでいるアイテムを置いたら合成できるバックパック内アイテムへ結ぶ線。
+   canvas外(ショップ・武器置き場)にもドラッグが及ぶため画面全体を覆うSVGとして重ね、
+   drag-ghost(常にその上に見えるべきカーソル追従画像)より背面・通常表示より前面に置く。 */
+.synthesis-connector-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 900;
+    pointer-events: none;
+}
+
+.drag-ghost {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .drag-ghostのdisplay:flexは、要素をhidden属性で隠す(display:none)際に
+   打ち消されてしまう(同じorigin/同程度の詳細度で後勝ちする)ため、
+   hidden属性側を明示的に優先させる。 */
+.drag-ghost[hidden] {
+    display: none;
+}
+
+.drag-ghost-visual {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.drag-ghost-visual .item-thumb {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.drag-ghost-label {
+    margin-top: 4px;
+    background: rgba(20, 20, 20, 0.85);
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.item-tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* バックパック内の武器/素材ホバー用ツールチップ(武器情報ツールチップ仕様書のデザイン準拠)。 */
+.item-tooltip-card {
+    width: 260px;
+    background: #ffffff;
+    border: 1px solid #7F77DD;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 12px;
+    color: #2c2c2a;
+}
+
+.item-tooltip-card__header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #F1EFE8;
+    padding: 8px 10px;
+}
+
+.item-tooltip-card__name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-tooltip-card__rarity {
+    display: flex;
+    gap: 3px;
+}
+
+.item-tooltip-card__star {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #2c2c2a;
+}
+
+.item-tooltip-card__star--empty {
+    background: transparent;
+    border: 1px solid #2c2c2a;
+}
+
+.item-tooltip-card__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #4B4FCB;
+    color: #4B4FCB;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.item-tooltip-card__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 10px 10px 0;
+}
+
+.item-tooltip-card__stat {
+    background: #F1EFE8;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.item-tooltip-card__stat-label {
+    color: #5a5850;
+    margin-right: 4px;
+}
+
+.item-tooltip-card__label {
+    padding: 8px 10px 0;
+    font-size: 11px;
+}
+
+.item-tooltip-card__effect-box {
+    margin: 4px 10px 10px;
+    background: #F1EFE8;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+.item-tooltip-card__category {
+    display: inline-block;
+    margin: 0 10px 10px;
+    background: #F1EFE8;
+    border: 1px solid #b4b2a9;
+    border-radius: 13px;
+    padding: 4px 14px;
+    font-size: 10px;
+}
+
+.money-badge {
+    display: inline-block;
+    background: #FAEEDA;
+    border: 1px solid #BA7517;
+    color: #6b4a0c;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+.money-badge--overlay {
+    position: absolute;
+    top: -12px;
+    right: 10px;
+}
+
+/* バトル準備画面ワイヤーフレーム仕様4節: 一時置き場80%・バトル開始枠20%を横並びに配置 */
+.prep-bottom-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.prep-bottom-row .temp-storage-panel {
+    flex: 8;
+    position: relative;
+}
+
+.prep-bottom-row .battle-start-frame {
+    flex: 2;
+}
+
+/* バトル準備画面ワイヤーフレーム仕様4節: バトル開始枠はボタン3:イラスト7の比率 */
+.battle-start-frame {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+}
+
+.battle-start-frame__button {
+    flex: 3;
+    display: flex;
+    align-items: center;
+}
+
+.battle-start-frame__button .start-battle {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #D85A30;
+    background: #FAECE7;
+    color: #993C1D;
+}
+
+.battle-start-frame__illustration {
+    flex: 7;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: repeating-linear-gradient(45deg, #eee, #eee 10px, #e2e2e2 10px, #e2e2e2 20px);
+    border: 1px dashed #999;
+    color: #888;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+/* 所持している武器を商売人の枠までドラッグしてきた際、売却できることを示すハイライト。 */
+.battle-start-frame__illustration--drop-target {
+    border: 2px solid #1D9E75;
+    background-color: #E1F5EE;
+}
+
+.merchant-image {
+    max-width: 35%;
+    max-height: 50%;
+    object-fit: contain;
+}
+
+.merchant-bubble {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #333;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.merchant-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 6px 0;
+    border-style: solid;
+    border-color: #fff transparent transparent;
+    filter: drop-shadow(0 1px 0 #999);
+}
+
+/* ---------- バトル画面 ---------- */
+.battle-layout {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* バトル画面ワイヤーフレーム仕様2・4節: プレイヤー/敵情報エリア(バックパック+イラスト) */
+.battle-info-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    position: relative;
+    min-height: 140px;
+}
+
+.battle-info-row--enemy {
+    flex-direction: row-reverse;
+}
+
+.battle-info-row__backpack {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.battle-info-row__backpack canvas {
+    border: 1px solid #999;
+    background: #fff;
+}
+
+.battle-info-row__illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(45deg, #eee, #eee 10px, #e2e2e2 10px, #e2e2e2 20px);
+    border: 1px dashed #999;
+    color: #888;
+    font-size: 12px;
+}
+
+/* TIME枠・一時停止ボタンは仕様通り同一サイズ(80×24)でTIME枠の直下に一時停止ボタン */
+.battle-info-row__time-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.time-frame, .pause-button {
+    width: 80px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #999;
+    background: #333;
+    color: #fff;
+    font-size: 11px;
+}
+
+.pause-button { cursor: pointer; }
+
+.vs-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.vs-block { width: 42%; }
+
+.vs-block__header {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.vs-block__bars {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vs-block__bars-inner {
+    flex: 1;
+}
+
+.hp-bar-track, .st-bar-track {
+    background: #ddd;
+    height: 14px;
+    width: 100%;
+    border: 1px solid #999;
+    margin-top: 4px;
+}
+
+.hp-bar-fill {
+    background: #c33;
+    height: 100%;
+}
+
+.st-bar-fill {
+    background: #38c;
+    height: 100%;
+}
+
+.vs-block.player .hp-bar-fill { background: #2a6; }
+
+/* 盾アイコン: HP/STバーの右横に縦長で配置。耐久値の数値表示は今後実装 */
+.shield-icon {
+    width: 22px;
+    height: 46px;
+    border: 1px solid #999;
+    background: #cdd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #456;
+}
+
+.status-effects-row {
+    margin-top: 6px;
+    border-top: 1px dashed #ccc;
+    padding-top: 4px;
+}
+
+.vs-mid {
+    text-align: center;
+    font-weight: bold;
+    align-self: center;
+}
+
+.battle-log {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    height: 90px;
+    overflow-y: auto;
+    font-size: 11px;
+}
+
+.skip-button {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+}
+
+/* ---------- バトル結果ポップアップ ---------- */
+.result-popup .result-title {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.marks-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.mark {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #999;
+    display: inline-block;
+}
+
+.mark.filled.win { background: #2a6; }
+.mark.filled.life { background: #c33; }
+
+.result-popup .next-button {
+    display: block;
+    margin: 16px auto 0;
+    padding: 10px 24px;
+}
+
+/* ---------- 合成確認ポップアップ ---------- */
+.confirm-popup ul {
+    font-size: 12px;
+    padding-left: 18px;
+}
+
+.confirm-popup .confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}

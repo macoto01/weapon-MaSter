@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l *)",
+      "Bash(node --check *)",
+      "Bash(bash /workspaces/weapon-MaSter/.claude/skills/run/smoke.sh)",
+      "Bash(bash .claude/skills/run/smoke.sh)",
+      "Bash(PORT=* bash .claude/skills/run/smoke.sh)",
+      "Bash(PORT=* bash /workspaces/weapon-MaSter/.claude/skills/run/smoke.sh)",
+      "Bash(lsof -ti:8000 -sTCP:LISTEN | xargs -r kill)",
+      "Bash(lsof -ti:8000 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)"
+    ]
+  }
+}

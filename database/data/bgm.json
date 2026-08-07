@@ -1,0 +1,12 @@
+{
+    "tracks": [
+        {
+            "key": "placeholder-battle-theme",
+            "name": "プレースホルダー戦闘テーマ",
+            "file": "placeholder-battle-theme.wav"
+        }
+    ],
+    "assignments": {
+        "battle": "placeholder-battle-theme"
+    }
+}

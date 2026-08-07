@@ -1,0 +1,66 @@
+[
+    {
+        "key": "r1_sharp_sword",
+        "name": "R1: 鋭利な剣",
+        "inputs": [
+            {
+                "type": "weapon",
+                "key": "sword"
+            },
+            {
+                "type": "material",
+                "key": "whetstone"
+            }
+        ],
+        "output_weapon_key": "sharp_sword"
+    },
+    {
+        "key": "r2_twin_strike_blade",
+        "name": "R2: 双撃の刃",
+        "inputs": [
+            {
+                "type": "weapon",
+                "key": "dagger"
+            },
+            {
+                "type": "material",
+                "key": "chain"
+            }
+        ],
+        "output_weapon_key": "twin_strike_blade"
+    },
+    {
+        "key": "r3_heavy_mace",
+        "name": "R3: 重装メイス",
+        "inputs": [
+            {
+                "type": "weapon",
+                "key": "mace"
+            },
+            {
+                "type": "material",
+                "key": "leather"
+            }
+        ],
+        "output_weapon_key": "heavy_mace"
+    },
+    {
+        "key": "r4_masterwork_shield",
+        "name": "R4: 名匠の盾",
+        "inputs": [
+            {
+                "type": "weapon",
+                "key": "shield"
+            },
+            {
+                "type": "material",
+                "key": "whetstone"
+            },
+            {
+                "type": "material",
+                "key": "chain"
+            }
+        ],
+        "output_weapon_key": "masterwork_shield"
+    }
+]

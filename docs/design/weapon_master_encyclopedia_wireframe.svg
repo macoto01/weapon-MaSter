@@ -1,0 +1,63 @@
+<svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+<style>
+text{font-family:sans-serif;fill:#2c2c2a}
+.th{font-weight:600}
+.panel{fill:#ffffff;stroke:#b4b2a9}
+.tagActive{fill:#EEEDFE;stroke:#7F77DD}
+.tagInactive{fill:#F1EFE8;stroke:#b4b2a9}
+.item{fill:#E1F5EE;stroke:#1D9E75}
+.itemLocked{fill:#F1EFE8;stroke:#b4b2a9}
+</style>
+
+<rect x="10" y="10" width="680" height="50" rx="4" class="panel"/>
+<text x="30" y="40" font-size="14">図鑑</text>
+<text x="640" y="40" font-size="12" text-anchor="end">戻る</text>
+
+<rect x="10" y="70" width="200" height="380" rx="4" class="panel"/>
+<text x="110" y="92" class="th" font-size="13" text-anchor="middle">タグ一覧</text>
+
+<rect x="24" y="105" width="172" height="55" rx="4" class="tagActive"/>
+<text x="110" y="137" font-size="13" text-anchor="middle">武器</text>
+
+<rect x="24" y="168" width="172" height="55" rx="4" class="tagInactive"/>
+<text x="110" y="200" font-size="13" text-anchor="middle">防具</text>
+
+<rect x="24" y="231" width="172" height="55" rx="4" class="tagInactive"/>
+<text x="110" y="263" font-size="13" text-anchor="middle">ライセンス</text>
+
+<rect x="24" y="294" width="172" height="55" rx="4" class="tagInactive"/>
+<text x="110" y="326" font-size="13" text-anchor="middle">秘宝</text>
+
+<rect x="24" y="357" width="172" height="55" rx="4" class="tagInactive"/>
+<text x="110" y="389" font-size="13" text-anchor="middle">合成</text>
+
+<rect x="230" y="70" width="460" height="380" rx="4" class="panel"/>
+<text x="460" y="92" class="th" font-size="13" text-anchor="middle">アイテム一覧: 武器</text>
+
+<rect x="245" y="105" width="430" height="55" rx="4" class="item"/>
+<text x="260" y="126" font-size="12">ソード</text>
+<text x="260" y="145" font-size="10">レア ★2</text>
+<text x="420" y="126" font-size="10">ATK8 / SPD10</text>
+<text x="420" y="145" font-size="10">スキル: なし</text>
+
+<rect x="245" y="168" width="430" height="55" rx="4" class="item"/>
+<text x="260" y="189" font-size="12">ダガー</text>
+<text x="260" y="208" font-size="10">レア ★1</text>
+<text x="420" y="189" font-size="10">ATK3 / SPD20</text>
+<text x="420" y="208" font-size="10">スキル: 合成で二段攻撃化</text>
+
+<rect x="245" y="231" width="430" height="55" rx="4" class="item"/>
+<text x="260" y="252" font-size="12">メイス</text>
+<text x="260" y="271" font-size="10">レア ★3</text>
+<text x="420" y="252" font-size="10">ATK20 / SPD5</text>
+<text x="420" y="271" font-size="10">スキル: 範囲攻撃</text>
+
+<rect x="245" y="294" width="430" height="55" rx="4" class="item"/>
+<text x="260" y="315" font-size="12">シールド</text>
+<text x="260" y="334" font-size="10">レア ★2</text>
+<text x="420" y="315" font-size="10">ATK0 / 支援型</text>
+<text x="420" y="334" font-size="10">スキル: 隣接ATK+20%</text>
+
+<rect x="245" y="357" width="430" height="55" rx="4" class="itemLocked"/>
+<text x="460" y="390" font-size="13" text-anchor="middle">?????</text>
+</svg>

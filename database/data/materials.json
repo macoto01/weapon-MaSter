@@ -1,0 +1,32 @@
+[
+    {
+        "key": "whetstone",
+        "name": "砥石",
+        "grid_width": 1,
+        "grid_height": 1,
+        "effect_type": "buff_atk",
+        "effect_value": 30,
+        "effect_range": "adjacent",
+        "price": 2
+    },
+    {
+        "key": "chain",
+        "name": "鎖",
+        "grid_width": 1,
+        "grid_height": 1,
+        "effect_type": "buff_spd",
+        "effect_value": 50,
+        "effect_range": "adjacent",
+        "price": 2
+    },
+    {
+        "key": "leather",
+        "name": "皮革",
+        "grid_width": 1,
+        "grid_height": 1,
+        "effect_type": "buff_hp",
+        "effect_value": 20,
+        "effect_range": "global",
+        "price": 2
+    }
+]
